@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Boiler Plate Downloader</title>
+</head>
+
+<script src="script/jquery-2.2.0.min.js"></script>
+
+<body>
+
+<form action="downloader.php" method="post">
+File: <input type="text" name="file">
+<input type="submit" value="Download">
+</form>
+
+
+<button id="get">get</button>
+
+<form action="clear.php" method="get">
+<input type="submit" value="Trash">
+</form>
+
+<script type="">
+    $(function () {
+        $('#get').click(function () {
+            $.getJSON('api/World', function (data) {
+                console.log(data);
+                console.log(data.message);
+            });
+                /*.done(function(data) {
+                    console.log( "second success" );
+                })
+                .fail(function(data) {
+                    console.log( "error" );
+                })
+                .always(function(data) {
+                    console.log( "complete" );
+                });*/
+            /*$.post('api/app.php?Action=Download', 'DATA', function(data, textStatus) {
+                //data contains the JSON object
+                //textStatus contains the status: success, error, etc
+            }, "json");*/
+        });
+    });
+</script>
+
+</body>
+</html>

@@ -6,7 +6,7 @@
 
 	// Initialization
 	//$debug = true;
-	$link = $_POST["file"];
+	$link = isset($_POST["file"]) ? $_POST["file"] : null ;
 	$file = basename($link) . ".zip";
 	$location = $download_dir . $file;
 
