@@ -17,3 +17,9 @@ $container['logger'] = function ($c) {
     $logger->pushHandler(new Monolog\Handler\StreamHandler($settings['path'], Monolog\Logger::DEBUG));
     return $logger;
 };
+
+// BoilerPlateDownloader
+$container['api'] = function ($c) {
+    $settings = $c->get('settings')['api'];
+    return new BoilerPlateDownloader\Api\Downloader($settings['download_path'], $settings['extension']);
+};

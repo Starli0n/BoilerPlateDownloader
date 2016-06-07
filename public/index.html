@@ -2,29 +2,104 @@
 <html>
 
 <head>
-<title>Boiler Plate Downloader</title>
+    <title>Boiler Plate Downloader</title>
 </head>
 
 <script src="script/jquery-2.2.0.min.js"></script>
 
 <body>
 
-<form action="downloader.php" method="post">
-File: <input type="text" name="file">
-<input type="submit" value="Download">
+<form id="fDownload" action="javascript:void(0);" onsubmit="onDownload()">
+    File: <input type="text" name="file" value="https://www.ietf.org/rfc/rfc2119.txt">
+    <input type="submit" value="Download">
 </form>
 
 
 <button id="get">get</button>
 
-<form action="clear.php" method="get">
-<input type="submit" value="Trash">
-</form>
+<script type="text/javascript">
+    function onDownload() {
+        console.log('onDownload');
+        console.log($('#fDownload').serializeArray()[0]);
 
-<script type="">
-    $(function () {
+        /*$.ajax({
+            type: 'PUT',
+            url: 'api/download',
+            contentType: "application/json",
+            data: $('#fDownload').serializeArray(),
+            success: function (data) {
+                console.log(data);
+                console.log(data.message);
+            }
+        });*/
+
+        /*$.ajax({
+            type: 'PUT',
+            url: 'api/download',
+            contentType: "application/json",
+            data: $('#fDownload').serializeArray()[0],
+            success: function () {
+                console.log('ajax PUT');
+                console.log(data);
+                console.log(data.message);
+            }
+        });*/
+
+        $.getJSON('api/hello/World', function (data) {
+            console.log('getJSON');
+            console.log(data);
+            console.log(data.message);
+        });
+    };
+
+    $('#get').click(function () {
+        var form = $('#fDownload').serializeArray()[0];
+        console.log(form);
+        console.log(form.name);
+        console.log(form.value);
+
+        /*$.getJSON('api/hello/World', function (data) {
+            console.log('getJSON');
+            console.log(data);
+            console.log(data.message);
+        });*/
+
+        /*$.ajax({
+            type: 'GET',
+            url: 'api/hello/World',
+            success: function (data) {
+                console.log('ajax Get');
+                console.log(data);
+                console.log(data.message);
+            }
+        });*/
+
+        $.ajax({
+            type: 'PUT',
+            url: 'api/download',
+            data: $('#fDownload').serializeArray(),
+            success: function (data) {
+                console.log('ajax PUT');
+                console.log(data);
+                console.log(data.message);
+            }
+        });
+    });
+
+    /*$(function () {
         $('#get').click(function () {
-            $.getJSON('api/World', function (data) {
+            $.ajax({
+                type: 'PUT',
+                url: 'api/download',
+                contentType: "application/json",
+                data: 'ID=1&Name=John&Age=10', // or $('#myform').serializeArray()
+                success: function (data) {
+                    console.log('success');
+                    console.log(data);
+                    console.log(data.message);
+                }
+            });
+            /*$.getJSON('api/World', function (data) {
                 console.log(data);
                 console.log(data.message);
             });
@@ -36,13 +111,13 @@ File: <input type="text" name="file">
                 })
                 .always(function(data) {
                     console.log( "complete" );
-                });*/
-            /*$.post('api/app.php?Action=Download', 'DATA', function(data, textStatus) {
+                });
+            $.post('api/app.php?Action=Download', 'DATA', function(data, textStatus) {
                 //data contains the JSON object
                 //textStatus contains the status: success, error, etc
-            }, "json");*/
+            }, "json");
         });
-    });
+    });*/
 </script>
 
 </body>

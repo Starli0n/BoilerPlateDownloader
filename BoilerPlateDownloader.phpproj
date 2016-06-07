@@ -23,6 +23,7 @@
     <Compile Include="public\api\index.php" />
     <Compile Include="public\index.html" />
     <Compile Include="public\test.php" />
+    <Compile Include="src\api\downloader.php" />
     <Compile Include="src\dependencies.php" />
     <Compile Include="src\middleware.php" />
     <Compile Include="src\routes.php" />
@@ -31,7 +32,6 @@
     <Compile Include=".gitignore" />
     <Compile Include="composer.json" />
     <Compile Include="composer.lock" />
-    <Compile Include="CONTRIBUTING.md" />
     <Compile Include="public\vs_startup.php" />
     <Compile Include="README.md" />
   </ItemGroup>
@@ -41,6 +41,7 @@
     <Folder Include="public\api\" />
     <Folder Include="public\script\" />
     <Folder Include="src" />
+    <Folder Include="src\api\" />
     <Folder Include="templates" />
   </ItemGroup>
   <ItemGroup>

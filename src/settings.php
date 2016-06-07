@@ -13,5 +13,11 @@ return [
             'name' => 'slim-app',
             'path' => __DIR__ . '/../logs/app.log',
         ],
+
+        // BoilerPlateDownloader Api settings
+        'api' => [
+            'download_path' =>  __DIR__ . '/../download/',
+            'extension' =>  '.bak',
+        ],
     ],
 ];
