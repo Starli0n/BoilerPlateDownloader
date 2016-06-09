@@ -53,7 +53,15 @@ class Downloader
 
     public function downloadRemoteFile(): bool
     {
-        $content = file_get_contents($this->$fileUrl);
-        return file_put_contents($this->location, $content);
+        $content = file_get_contents($this->fileUrl);
+        if ($content) {
+            return file_put_contents($this->location, $content);
+        }
+        return false;
+    }
+
+    public function location(): string
+    {
+        return $this->location;
     }
 }

@@ -14,65 +14,14 @@
     <input type="submit" value="Download">
 </form>
 
-
-<button id="get">get</button>
+<button id="bHelloWorld">Hello World</button>
 
 <script type="text/javascript">
     function onDownload() {
-        console.log('onDownload');
-        console.log($('#fDownload').serializeArray()[0]);
-
-        /*$.ajax({
-            type: 'PUT',
-            url: 'api/download',
-            contentType: "application/json",
-            data: $('#fDownload').serializeArray(),
-            success: function (data) {
-                console.log(data);
-                console.log(data.message);
-            }
-        });*/
-
-        /*$.ajax({
-            type: 'PUT',
-            url: 'api/download',
-            contentType: "application/json",
-            data: $('#fDownload').serializeArray()[0],
-            success: function () {
-                console.log('ajax PUT');
-                console.log(data);
-                console.log(data.message);
-            }
-        });*/
-
-        $.getJSON('api/hello/World', function (data) {
-            console.log('getJSON');
-            console.log(data);
-            console.log(data.message);
-        });
-    };
-
-    $('#get').click(function () {
         var form = $('#fDownload').serializeArray()[0];
         console.log(form);
         console.log(form.name);
         console.log(form.value);
-
-        /*$.getJSON('api/hello/World', function (data) {
-            console.log('getJSON');
-            console.log(data);
-            console.log(data.message);
-        });*/
-
-        /*$.ajax({
-            type: 'GET',
-            url: 'api/hello/World',
-            success: function (data) {
-                console.log('ajax Get');
-                console.log(data);
-                console.log(data.message);
-            }
-        });*/
 
         $.ajax({
             type: 'PUT',
@@ -82,42 +31,26 @@
                 console.log('ajax PUT');
                 console.log(data);
                 console.log(data.message);
+                console.log(data.location);
+            },
+            error: function (data) {
+                console.log('Error: ajax PUT');
+                console.log(data.responseText);
             }
+        });
+    };
+
+    $('#bHelloWorld').click(function () {
+        console.log('bHelloWorld');
+        console.log($('#bHelloWorld').serializeArray()[0]);
+
+        $.getJSON('api/hello/World', function (data) {
+            console.log('getJSON');
+            console.log(data);
+            console.log(data.message);
         });
     });
 
-    /*$(function () {
-        $('#get').click(function () {
-            $.ajax({
-                type: 'PUT',
-                url: 'api/download',
-                contentType: "application/json",
-                data: 'ID=1&Name=John&Age=10', // or $('#myform').serializeArray()
-                success: function (data) {
-                    console.log('success');
-                    console.log(data);
-                    console.log(data.message);
-                }
-            });
-            /*$.getJSON('api/World', function (data) {
-                console.log(data);
-                console.log(data.message);
-            });
-                /*.done(function(data) {
-                    console.log( "second success" );
-                })
-                .fail(function(data) {
-                    console.log( "error" );
-                })
-                .always(function(data) {
-                    console.log( "complete" );
-                });
-            $.post('api/app.php?Action=Download', 'DATA', function(data, textStatus) {
-                //data contains the JSON object
-                //textStatus contains the status: success, error, etc
-            }, "json");
-        });
-    });*/
 </script>
 
 </body>
