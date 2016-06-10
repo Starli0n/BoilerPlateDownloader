@@ -12,6 +12,11 @@ class Downloader
     /**
      * @var string
      */
+    private $downloadUri;
+
+    /**
+     * @var string
+     */
     private $extension;
 
     /**
@@ -24,9 +29,10 @@ class Downloader
      */
     private $location;
 
-    public function __construct(string $downloadPath, string $extension)
+    public function __construct(string $downloadPath, string $downloadUri, string $extension)
     {
         $this->downloadPath = $downloadPath;
+        $this->downloadUri = $downloadUri;
         $this->extension = $extension;
     }
 
@@ -39,7 +45,9 @@ class Downloader
     public function setFileUrl(string $fileUrl): bool
     {
         $this->fileUrl = $fileUrl;
-        $this->location = $this->downloadPath . basename($fileUrl) . $this->extension;
+        $baseName = basename($fileUrl) . $this->extension;
+        $this->location = $this->downloadPath . $baseName;
+        $this->downloadUri = $this->downloadUri . $baseName;
         $low = strtolower($fileUrl);
 
         if ($this->startsWith($low, "http"))
@@ -62,6 +70,6 @@ class Downloader
 
     public function location(): string
     {
-        return $this->location;
+        return $this->downloadUri;
     }
 }
