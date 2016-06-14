@@ -9,48 +9,133 @@
 
 <body>
 
-<form id="fDownload" action="javascript:void(0);" onsubmit="onDownload()">
-    File: <input type="text" name="file" value="https://www.ietf.org/rfc/rfc2119.txt">
+<!--<p><button id="iHelloWorld">Hello World</button></p>-->
+
+<form id="iDownload" action="javascript:void(0);" onsubmit="onDownload()">
+    File: <input type="text" name="file" value="">
     <input type="submit" value="Download">
 </form>
 
-<button id="bHelloWorld">Hello World</button>
+<p>
+    <p>Download folder:</p>
+    <div>
+        <input type="checkbox" id="iCheckAll" onclick="onCheckAll()">
+        <label for="iCheckAll">All files</label>
+    </div>
+    <span id="iFiles"></span>
+    <p><button id="iDelete">Delete</button></p>
+</p>
 
 <script type="text/javascript">
+    window.onload = function () {
+        console.log('On Load');
+
+        $.ajax({
+            type: 'GET',
+            url: 'api/list',
+            success: function (data) {
+                console.log(data);
+                console.log(data.files);
+                listFiles(data);
+            },
+            error: function (data) {
+                console.log(data.responseText);
+            }
+        });
+    }
+
     function onDownload() {
-        var form = $('#fDownload').serializeArray()[0];
+        console.log('On Download');
+
+        var form = $('#iDownload').serializeArray();
         console.log(form);
-        console.log(form.name);
-        console.log(form.value);
+        console.log(form[0]);
 
         $.ajax({
             type: 'PUT',
             url: 'api/download',
-            data: $('#fDownload').serializeArray(),
+            data: $('#iDownload').serializeArray(),
             success: function (data) {
-                console.log('ajax PUT');
                 console.log(data);
-                console.log(data.message);
-                console.log(data.location);
+                console.log(data.files);
+                listFiles(data);
             },
             error: function (data) {
-                console.log('Error: ajax PUT');
                 console.log(data.responseText);
             }
         });
     };
 
-    $('#bHelloWorld').click(function () {
-        console.log('bHelloWorld');
-        console.log($('#bHelloWorld').serializeArray()[0]);
+    function onCheckAll() {
+        $('.cCheck').prop('checked', $('#iCheckAll').prop('checked'));
+    };
 
-        $.getJSON('api/hello/World', function (data) {
-            console.log('getJSON');
-            console.log(data);
-            console.log(data.message);
+    $('#iDelete').click(function () {
+        console.log('On Delete');
+
+        var files = [];
+        $('.cCheck').each(function () {
+            if (this.checked) {
+                files.push(this.value);
+            }
+        });
+        console.log(files);
+
+        if (files.length <= 0) {
+            console.log('Nothing to delete');
+            return;
+        }
+        var data = { files: files };
+
+        $.ajax({
+            type: 'DELETE',
+            url: 'api/delete',
+            data: data,
+            success: function (data) {
+                console.log(data);
+                console.log(data.files);
+                listFiles(data);
+            },
+            error: function (data) {
+                console.log(data.responseText);
+            }
         });
     });
 
+    function listFiles(data) {
+        var directory = data.directory;
+        var files = data.files;
+        $('#iFiles').empty();
+        files.forEach(function (file, id) {
+            var elt = $('<div>');
+            var checkbox = $('<input>', {
+                type: 'checkbox',
+                class: 'cCheck',
+                id: 'iCheck' + id,
+                name: 'file',
+                value: file
+            });
+            var label = $('<label>', {
+                for: 'iCheck' + id
+            });
+            var link = $('<a>', {
+                href: directory + file
+            });
+            elt.append(checkbox);
+            elt.append(label);
+            label.append(link);
+            link.append(file)
+            $("#iFiles").append(elt);
+        });
+        $('#iCheckAll').prop('checked', false);
+    };
+
+    $('#iHelloWorld').click(function () {
+        console.log('Hello World');
+        $.getJSON('api/hello/World', function (data) {
+            console.log(data);
+        });
+    });
 </script>
 
 </body>

@@ -17,7 +17,7 @@ return [
         // BoilerPlateDownloader Api settings
         'api' => [
             'download_path' =>  __DIR__ . '/../public/download/',
-            'download_uri' =>  'download/',
+            'download_directory' =>  'download/',
             'extension' =>  '.zip',
         ],
     ],

@@ -21,5 +21,5 @@ $container['logger'] = function ($c) {
 // BoilerPlateDownloader
 $container['api'] = function ($c) {
     $settings = $c->get('settings')['api'];
-    return new BoilerPlateDownloader\Api\Downloader($settings['download_path'], $settings['download_uri'], $settings['extension']);
+    return new BoilerPlateDownloader\Api\Downloader($settings['download_path'], $settings['download_directory'], $settings['extension']);
 };

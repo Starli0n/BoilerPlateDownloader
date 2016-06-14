@@ -12,8 +12,18 @@ $app->get('/hello/{name}', function ($request, $response, $args) {
     return $response;
 });
 
+$app->get('/list', function ($request, $response, $args) {
+    $this->logger->info("BoilerPlateDownloader '/' list");
+
+    $files = $this->api->listDir();
+
+    $data = array(
+        'directory' => $this->api->getDownloadDirectory(),
+        'files' => $files);
+    return $response->withJson($data);
+});
+
 $app->put('/download', function ($request, $response, $args) {
-    // Sample log message
     $this->logger->info("BoilerPlateDownloader '/' download");
 
     $file = $request->getParsedBodyParam('file');
@@ -32,10 +42,23 @@ $app->put('/download', function ($request, $response, $args) {
         $data = array('message' => 'The download has failed');
         return $response->withJson($data, 400);
     }
+    $files = $this->api->listDir();
 
     $data = array(
-        'message' => 'Success',
-        'location' => $this->api->location()
-    );
+        'directory' => $this->api->getDownloadDirectory(),
+        'files' => $files);
     return $response->withJson($data, 201);
+});
+
+$app->delete('/delete', function ($request, $response, $args) {
+    $this->logger->info("BoilerPlateDownloader '/' delete");
+
+    $files = $request->getParsedBodyParam('files');
+    $this->api->deleteFiles($files);
+    $files = $this->api->listDir();
+
+    $data = array(
+        'directory' => $this->api->getDownloadDirectory(),
+        'files' => $files);
+    return $response->withJson($data);
 });
