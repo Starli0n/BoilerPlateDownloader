@@ -6,12 +6,13 @@
 </head>
 
 <script src="script/jquery-2.2.0.min.js"></script>
+<script src="script/bpd.js"></script>
 
 <body>
 
-<!--<p><button id="iHelloWorld">Hello World</button></p>-->
+<p><button id="iHelloWorld">Hello World</button></p>
 
-<form id="iDownload" action="javascript:void(0);" onsubmit="onDownload()">
+<form id="iDownload" action="javascript:void(0);" onsubmit="Bpd.Ui.onDownload()">
     File: <input type="text" name="file" value="">
     <input type="submit" value="Download">
 </form>
@@ -19,7 +20,7 @@
 <p>
     <p>Download folder:</p>
     <div>
-        <input type="checkbox" id="iCheckAll" onclick="onCheckAll()">
+        <input type="checkbox" id="iCheckAll" onclick="Bpd.Ui.onCheckAll()">
         <label for="iCheckAll">All files</label>
     </div>
     <span id="iFiles"></span>
@@ -27,115 +28,11 @@
 </p>
 
 <script type="text/javascript">
-    window.onload = function () {
-        console.log('On Load');
+    /*window.onload = function () {
+        Bpd.Ui.init();
+    };*/
 
-        $.ajax({
-            type: 'GET',
-            url: 'api/list',
-            success: function (data) {
-                console.log(data);
-                console.log(data.files);
-                listFiles(data);
-            },
-            error: function (data) {
-                console.log(data.responseText);
-            }
-        });
-    }
-
-    function onDownload() {
-        console.log('On Download');
-
-        var form = $('#iDownload').serializeArray();
-        console.log(form);
-        console.log(form[0]);
-
-        $.ajax({
-            type: 'PUT',
-            url: 'api/download',
-            data: $('#iDownload').serializeArray(),
-            success: function (data) {
-                console.log(data);
-                console.log(data.files);
-                listFiles(data);
-            },
-            error: function (data) {
-                console.log(data.responseText);
-            }
-        });
-    };
-
-    function onCheckAll() {
-        $('.cCheck').prop('checked', $('#iCheckAll').prop('checked'));
-    };
-
-    $('#iDelete').click(function () {
-        console.log('On Delete');
-
-        var files = [];
-        $('.cCheck').each(function () {
-            if (this.checked) {
-                files.push(this.value);
-            }
-        });
-        console.log(files);
-
-        if (files.length <= 0) {
-            console.log('Nothing to delete');
-            return;
-        }
-        var data = { files: files };
-
-        $.ajax({
-            type: 'DELETE',
-            url: 'api/delete',
-            data: data,
-            success: function (data) {
-                console.log(data);
-                console.log(data.files);
-                listFiles(data);
-            },
-            error: function (data) {
-                console.log(data.responseText);
-            }
-        });
-    });
-
-    function listFiles(data) {
-        var directory = data.directory;
-        var files = data.files;
-        $('#iFiles').empty();
-        files.forEach(function (file, id) {
-            var elt = $('<div>');
-            var checkbox = $('<input>', {
-                type: 'checkbox',
-                class: 'cCheck',
-                id: 'iCheck' + id,
-                name: 'file',
-                value: file
-            });
-            var label = $('<label>', {
-                for: 'iCheck' + id
-            });
-            var link = $('<a>', {
-                href: directory + file
-            });
-            elt.append(checkbox);
-            elt.append(label);
-            label.append(link);
-            link.append(file)
-            $("#iFiles").append(elt);
-        });
-        $('#iCheckAll').prop('checked', false);
-    };
-
-    $('#iHelloWorld').click(function () {
-        console.log('Hello World');
-        $.getJSON('api/hello/World', function (data) {
-            console.log(data);
-        });
-    });
+    Bpd.Ui.init();
 </script>
 
 </body>

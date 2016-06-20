@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="public\api\.htaccess" />
+    <Content Include="public\script\bpd.js" />
     <Content Include="public\script\jquery-2.2.0.min.js" />
   </ItemGroup>
 </Project>
