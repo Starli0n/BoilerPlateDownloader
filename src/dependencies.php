@@ -23,3 +23,11 @@ $container['api'] = function ($c) {
     $settings = $c->get('settings')['api'];
     return new BoilerPlateDownloader\Api\Downloader($settings['download_path'], $settings['download_directory'], $settings['extension']);
 };
+
+// Error handler
+$container['errorHandler'] = function ($c) {
+    return function ($request, $response, $exception) use ($c) {
+        $data = array('message' => 'Internal error');
+        return $c['response']->withJson($data, 500);
+    };
+};
