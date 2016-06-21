@@ -3,5 +3,7 @@
 !/logs/README.md
 .vs
 *.user
-download/*.bak
-download/*.zip
+**/download/*
+!**/download/README.md
+**/node_modules/
+**/bower_components/

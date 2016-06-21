@@ -1,0 +1,30 @@
+{
+  "name": "boilerplatedownloader",
+  "version": "1.0.0",
+  "description": "Download file to a boiler plate server",
+  "main": "public/index.html",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-uglify": "^1.5.3",
+    "gulp-usemin": "^0.3.23"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Starli0n@github.com/Starli0n/BoilerPlateDownloader.git"
+  },
+  "keywords": [
+    "rest",
+    "slim",
+    "framework"
+  ],
+  "author": "Starli0n <Starli0n@users.noreply.github.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Starli0n/BoilerPlateDownloader/issues"
+  },
+  "homepage": "https://github.com/Starli0n/BoilerPlateDownloader#readme"
+}
