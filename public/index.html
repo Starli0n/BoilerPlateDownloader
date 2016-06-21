@@ -28,11 +28,16 @@
 </p>
 
 <script type="text/javascript">
-    /*window.onload = function () {
-        Bpd.Ui.init();
-    };*/
+    console.log('On Load');
+    Bpd.Api.list();
 
-    Bpd.Ui.init();
+    $('#iDelete').click(function () {
+        Bpd.Ui.onDelete();
+    });
+
+    $('#iHelloWorld').click(function () {
+        Bpd.Ui.onHelloWorld();
+    });
 </script>
 
 </body>

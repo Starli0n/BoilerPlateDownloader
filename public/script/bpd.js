@@ -64,25 +64,11 @@ Bpd.Api = (function () {
 
 Bpd.Ui = (function () {
     return {
-        init: init,
         listFiles: listFiles,
         onDownload: onDownload,
         onCheckAll: onCheckAll,
-        //onDelete: onDelete,
-        //onHelloWorld, onHelloWorld,
-    };
-
-    function init() {
-        console.log('On Load');
-        Bpd.Api.list();
-
-        $('#iDelete').click(function () {
-            onDelete();
-        });
-
-        $('#iHelloWorld').click(function () {
-            onHelloWorld();
-        });
+        onDelete: onDelete,
+        onHelloWorld, onHelloWorld,
     };
 
     function listFiles(data) {
