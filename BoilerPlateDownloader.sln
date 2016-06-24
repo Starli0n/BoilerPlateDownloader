@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{A0786B88-2ADB-4C21-ABE8-AA2D79766269}") = "BoilerPlateDownloader", "BoilerPlateDownloader.phpproj", "{603ADF53-CC72-4B25-BC07-868E085DF736}"
 EndProject

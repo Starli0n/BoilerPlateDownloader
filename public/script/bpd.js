@@ -21,7 +21,7 @@ Bpd.Api = (function () {
                 console.log(data.responseText);
             }
         });
-    };
+    }
 
     function download(data) {
         $.ajax({
@@ -37,7 +37,7 @@ Bpd.Api = (function () {
                 console.log(data.responseText);
             }
         });
-    };
+    }
 
     function deleteList(data) {
         $.ajax({
@@ -53,13 +53,13 @@ Bpd.Api = (function () {
                 console.log(data.responseText);
             }
         });
-    };
+    }
 
     function hello(data) {
         $.getJSON('api/hello/' + data, function (data) {
             console.log(data);
         });
-    };
+    }
 })();
 
 Bpd.Ui = (function () {
@@ -68,7 +68,7 @@ Bpd.Ui = (function () {
         onDownload: onDownload,
         onCheckAll: onCheckAll,
         onDelete: onDelete,
-        onHelloWorld, onHelloWorld,
+        onHelloWorld: onHelloWorld
     };
 
     function listFiles(data) {
@@ -93,11 +93,11 @@ Bpd.Ui = (function () {
             elt.append(checkbox);
             elt.append(label);
             label.append(link);
-            link.append(file)
+            link.append(file);
             $("#iFiles").append(elt);
         });
         $('#iCheckAll').prop('checked', false);
-    };
+    }
 
     function onDownload() {
         console.log('On Download');
@@ -107,11 +107,11 @@ Bpd.Ui = (function () {
         console.log(form[0]);
 
         Bpd.Api.download($('#iDownload').serializeArray());
-    };
+    }
 
     function onCheckAll() {
         $('.cCheck').prop('checked', $('#iCheckAll').prop('checked'));
-    };
+    }
 
     function onDelete() {
         console.log('On Delete');
@@ -131,7 +131,7 @@ Bpd.Ui = (function () {
         var data = { files: files };
 
         Bpd.Api.deleteList(data);
-    };
+    }
 
     function onHelloWorld() {
         Bpd.Api.hello('World');

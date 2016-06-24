@@ -2,15 +2,18 @@
 <html>
 
 <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+
     <title>Boiler Plate Downloader</title>
 </head>
 
-<!-- build:js script/site.js -->
+<body>
+
+<!-- build:js site.min.js -->
 <script src="script/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="script/bpd.js"></script>
 <!-- endbuild -->
-
-<body>
 
 <p><button id="iHelloWorld">Hello World</button></p>
 
@@ -19,7 +22,7 @@
     <input type="submit" value="Download">
 </form>
 
-<p>
+<div>
     <p>Download folder:</p>
     <div>
         <input type="checkbox" id="iCheckAll" onclick="Bpd.Ui.onCheckAll()">
@@ -27,7 +30,7 @@
     </div>
     <span id="iFiles"></span>
     <p><button id="iDelete">Delete</button></p>
-</p>
+</div>
 
 <script type="text/javascript">
     console.log('On Load');

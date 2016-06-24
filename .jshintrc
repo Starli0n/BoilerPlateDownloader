@@ -1,0 +1,24 @@
+{
+    "curly": true,
+    "eqeqeq": true,
+    "immed": true,
+    "latedef": "nofunc",
+    "newcap": true,
+    "noarg": true,
+    "sub": true,
+    "undef": true,
+    "boss": true,
+    "eqnull": true,
+    "browser": true,
+    "node": false,
+    "globals": {
+        "DEBUG": true,
+        "ENV": true,
+        "define": true,
+        "require": true,
+        "angular": true,
+        "$": true,
+        "console": true,
+        "jsPDF": true
+    }
+}
