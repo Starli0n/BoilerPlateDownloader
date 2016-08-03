@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">public</Configuration>
     <Name>BoilerPlateDownloader</Name>
     <ProjectGuid>{603adf53-cc72-4b25-bc07-868e085df736}</ProjectGuid>
     <RootNamespace>
@@ -10,19 +10,25 @@
     <ProjectTypeGuids>{A0786B88-2ADB-4C21-ABE8-AA2D79766269}</ProjectTypeGuids>
     <Runtime>PHP</Runtime>
     <RuntimeVersion>7.0</RuntimeVersion>
+    <StartAction>SpecificPage</StartAction>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'public' ">
     <IncludeDebugInformation>true</IncludeDebugInformation>
+    <SpecificPageValue>public/index.html</SpecificPageValue>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'publish' ">
     <IncludeDebugInformation>false</IncludeDebugInformation>
+    <SpecificPageValue>publish/index.html</SpecificPageValue>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'deploy' ">
+    <IncludeDebugInformation>false</IncludeDebugInformation>
+    <SpecificPageValue>deploy/publish/index.html</SpecificPageValue>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="logs\README.md" />
     <Compile Include="public\.htaccess" />
     <Compile Include="public\api\index.php" />
     <Compile Include="public\index.html" />
-    <Compile Include="public\test.php" />
     <Compile Include="src\api\downloader.php" />
     <Compile Include="src\dependencies.php" />
     <Compile Include="src\middleware.php" />
@@ -32,7 +38,6 @@
     <Compile Include=".gitignore" />
     <Compile Include="composer.json" />
     <Compile Include="composer.lock" />
-    <Compile Include="public\vs_startup.php" />
     <Compile Include="README.md" />
   </ItemGroup>
   <ItemGroup>
