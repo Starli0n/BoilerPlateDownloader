@@ -6,14 +6,18 @@ var minifyCss = require('gulp-minify-css');
 var jshint = require('gulp-jshint');
 var stylish = require('jshint-stylish');
 var del = require('del');
+var zip = require('gulp-zip');
+
 
 // Variables
+var project = 'boilerplatedownloader';
+
 var paths = {
     deploy: 'deploy',
     publish: 'publish',
     public: 'public',
     bower: 'bower_components',
-    node: 'node_modules'    
+    node: 'node_modules'
 };
 
 var files = {};
@@ -26,8 +30,8 @@ files.exclude = [
 ];
 
 files = {
-    deploy: paths.deploy + '/*',
-    publish: paths.publish + '/*',
+    deploy: paths.deploy + '/**/*',
+    publish: paths.publish + '/**/*',
     public: ['public/**',
             '!public/{script,script/**}',
             '!public/download/**',
@@ -45,7 +49,7 @@ files = {
 
 // Functions
 function copyFromPublic(toDir) {
-    gulp.src(files.public)
+    return gulp.src(files.public)
         .pipe(usemin({
             assetsDir: 'public',
             css: [minifyCss(), 'concat'],
@@ -54,35 +58,50 @@ function copyFromPublic(toDir) {
         .pipe(gulp.dest(toDir));
 }
 
+function lintjs() {
+    return gulp.src(files.js)
+        .pipe(jshint('.jshintrc'))
+        .pipe(jshint.reporter('jshint-stylish'));
+}
+
 
 // Minimal tasks
 gulp.task('clean:publish', function () {
-    del([files.publish]);
+    return del([files.publish]);
 });
 
 gulp.task('clean:deploy', function () {
-    del([files.deploy]);
+    return del([files.deploy]);
 });
 
-gulp.task('copy:publish', function () {
-    copyFromPublic(paths.publish);
+gulp.task('lint:publish', ['clean:publish'], function () {
+    return lintjs();
 });
 
-gulp.task('copy:deploy', function () {
+gulp.task('lint:deploy', ['clean:deploy'], function () {
+    return lintjs();
+});
+
+gulp.task('copy:publish', ['lint:publish'], function () {
+    return copyFromPublic(paths.publish);
+});
+
+
+gulp.task('copy:deploy', ['lint:deploy'], function () {
     copyFromPublic(paths.deploy + '/' + paths.public);
-    gulp.src(files.private, { "base": "." })
+    return gulp.src(files.private, { "base": "." })
         .pipe(gulp.dest(paths.deploy));
 });
 
-gulp.task('lint:js', function () {
-    gulp.src(files.js)
-        .pipe(jshint('.jshintrc'))
-        .pipe(jshint.reporter('jshint-stylish'));
+gulp.task('zip:deploy', ['copy:deploy'], function () {
+    return gulp.src(files.deploy)
+        .pipe(zip(project + '.zip'))
+        .pipe(gulp.dest(paths.deploy));
 });
 
 
 // Global tasks
 gulp.task('default', ['clean']);
-gulp.task('clean', ['clean:deploy', 'clean:publish']);
-gulp.task('publish', ['clean:publish', 'lint:js', 'copy:publish']);
-gulp.task('deploy', ['clean:deploy', 'lint:js', 'copy:deploy']);
+gulp.task(':clean', ['clean:deploy', 'clean:publish']);
+gulp.task(':publish', ['clean:publish', 'lint:publish', 'copy:publish']);
+gulp.task(':deploy', ['clean:deploy', 'lint:deploy', 'copy:deploy', 'zip:deploy']);
