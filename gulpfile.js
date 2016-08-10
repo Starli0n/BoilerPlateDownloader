@@ -1,9 +1,11 @@
 // Requires
 var gulp = require('gulp');
 var usemin = require('gulp-usemin');
+var inject = require('gulp-inject-string');
 var uglify = require('gulp-uglify');
 var minifyCss = require('gulp-minify-css');
 var jshint = require('gulp-jshint');
+var rename = require("gulp-rename");
 var stylish = require('jshint-stylish');
 var del = require('del');
 var zip = require('gulp-zip');
@@ -13,12 +15,14 @@ var zip = require('gulp-zip');
 var project = 'boilerplatedownloader';
 
 var paths = {
-    deploy: 'deploy',
+    deploy: project,
     publish: 'publish',
     public: 'public',
     bower: 'bower_components',
     node: 'node_modules'
 };
+
+paths.deploy_public = project + '/' + paths.public;
 
 var files = {};
 
@@ -49,7 +53,7 @@ files = {
 
 // Functions
 function copyFromPublic(toDir) {
-    return gulp.src(files.public)
+    return gulp.src(files.public, { dot : true })
         .pipe(usemin({
             assetsDir: 'public',
             css: [minifyCss(), 'concat'],
@@ -67,11 +71,11 @@ function lintjs() {
 
 // Minimal tasks
 gulp.task('clean:publish', function () {
-    return del([files.publish]);
+    return del([files.publish], { dot : true });
 });
 
 gulp.task('clean:deploy', function () {
-    return del([files.deploy]);
+    return del([files.deploy], { dot : true });
 });
 
 gulp.task('lint:publish', ['clean:publish'], function () {
@@ -86,15 +90,25 @@ gulp.task('copy:publish', ['lint:publish'], function () {
     return copyFromPublic(paths.publish);
 });
 
-
 gulp.task('copy:deploy', ['lint:deploy'], function () {
-    copyFromPublic(paths.deploy + '/' + paths.public);
-    return gulp.src(files.private, { "base": "." })
+    copyFromPublic(paths.deploy_public);
+
+    gulp.src('deploy.htaccess')
+        .pipe(rename('.htaccess'))
+        .pipe(gulp.dest(paths.deploy));
+
+    return gulp.src(files.private, { base: "." })
         .pipe(gulp.dest(paths.deploy));
 });
 
-gulp.task('zip:deploy', ['copy:deploy'], function () {
-    return gulp.src(files.deploy)
+gulp.task('base:deploy', ['copy:deploy'], function () {
+    return gulp.src(paths.deploy_public + '/index.html')
+        .pipe(inject.after('<head>', '\n    <base href="public/" />'))
+        .pipe(gulp.dest(paths.deploy_public));
+});
+
+gulp.task('zip:deploy', ['base:deploy'], function () {
+    return gulp.src(files.deploy, { base: ".", dot : true })
         .pipe(zip(project + '.zip'))
         .pipe(gulp.dest(paths.deploy));
 });
@@ -104,4 +118,4 @@ gulp.task('zip:deploy', ['copy:deploy'], function () {
 gulp.task('default', ['clean']);
 gulp.task(':clean', ['clean:deploy', 'clean:publish']);
 gulp.task(':publish', ['clean:publish', 'lint:publish', 'copy:publish']);
-gulp.task(':deploy', ['clean:deploy', 'lint:deploy', 'copy:deploy', 'zip:deploy']);
+gulp.task(':deploy', ['clean:deploy', 'lint:deploy', 'copy:deploy', 'base:deploy', 'zip:deploy']);
