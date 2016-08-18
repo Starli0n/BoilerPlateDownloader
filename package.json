@@ -18,7 +18,8 @@
     "jshint-stylish": "^2.2.0"
   },
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "postinstall": "bower install && gulp :publish && gulp :deploy"
   },
   "repository": {
     "type": "git",

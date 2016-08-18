@@ -17,14 +17,16 @@ Start with the next chapiter if it is your first intall and if node.js is not in
 > composer update
 > npm install
 > bower install
-> gulp
+> gulp :deploy
 ```
 
 For PHP Tools for Visual Studio
 
 `BoilerPlateDownloader.phpproj > Properties > Application > Start action`
 
-* `Specific page` `public/vs_startup.php`
+* `Specific page` `public/index.html`
+* `Specific page` `publish/index.html`
+* `Specific page` `boilerplatedownloader/public/index.html`
 
 
 ## First Install of the toolchain
@@ -36,7 +38,7 @@ For PHP Tools for Visual Studio
 > npm install -g gulp-cli
 ````
 
-On Windows `npm` should be found here: 
+On Windows `npm` should be found here:
 `C:\Users\Starli0n\AppData\Roaming\npm`
 
 
