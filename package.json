@@ -5,6 +5,7 @@
   "main": "public/index.html",
   "dependencies": {},
   "devDependencies": {
+    "bower": "^1.7.9",
     "del": "^2.2.1",
     "gulp": "^3.9.1",
     "gulp-inject-string": "^1.1.0",
@@ -19,7 +20,7 @@
   },
   "scripts": {
     "test": "test",
-    "postinstall": "bower install && gulp :publish && gulp :deploy"
+    "postinstall": "./node_modules/bower/bin/bower install && gulp :publish && gulp :deploy"
   },
   "repository": {
     "type": "git",
