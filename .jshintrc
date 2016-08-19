@@ -19,6 +19,7 @@
         "angular": true,
         "$": true,
         "console": true,
-        "jsPDF": true
+        "jsPDF": true,
+        "process": true
     }
 }

@@ -18,6 +18,7 @@ Start with the next chapiter if it is your first intall and if node.js is not in
 > npm install
 > bower install
 > gulp :deploy
+> gulp :test
 ```
 
 For PHP Tools for Visual Studio

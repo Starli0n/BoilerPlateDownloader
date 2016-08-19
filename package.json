@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "Download file to a boiler plate server",
   "main": "public/index.html",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "bower": "^1.7.9",
     "del": "^2.2.1",
     "gulp": "^3.9.1",
@@ -18,9 +17,12 @@
     "jshint": "^2.9.2",
     "jshint-stylish": "^2.2.0"
   },
+  "devDependencies": {
+    "gulp-phpunit": "^0.16.0"
+  },
   "scripts": {
-    "test": "test",
-    "postinstall": "./node_modules/bower/bin/bower install && gulp :publish && gulp :deploy"
+    "test": "gulp :test",
+    "postinstall": "node ./node_modules/bower/bin/bower install && gulp :publish && gulp :deploy"
   },
   "repository": {
     "type": "git",

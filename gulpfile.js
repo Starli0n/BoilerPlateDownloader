@@ -19,7 +19,10 @@ var paths = {
     publish: 'publish',
     public: 'public',
     bower: 'bower_components',
-    node: 'node_modules'
+    node: 'node_modules',
+    vendor: 'vendor',
+    report: 'report',
+    test: 'test'
 };
 
 paths.deploy_public = project + '/' + paths.public;
@@ -30,7 +33,9 @@ files.exclude = [
     '!**/' + paths.bower + '/**',
     '!**/' + paths.node + '/**',
     '!' + paths.deploy + '/**',
-    '!' + paths.publish + '/**'
+    '!' + paths.publish + '/**',
+    '!' + paths.vendor + '/**',
+    '!' + paths.report + '/**'
 ];
 
 files = {
@@ -47,7 +52,9 @@ files = {
         'vendor/**/*',
         'logs',
         '!logs/**'],
-    js: ['**/*.js'].concat(files.exclude)
+    js: ['**/*.js'].concat(files.exclude),
+    phpunit: paths.test + '/phpunit.xml',
+    bootstrap: './' + paths.test + '/bootstrap.php'
 };
 
 
@@ -113,9 +120,24 @@ gulp.task('zip:deploy', ['base:deploy'], function () {
         .pipe(gulp.dest(paths.deploy));
 });
 
+if (process.env.NODE_ENV !== 'production') {
+    var phpunit = require('gulp-phpunit');
+
+    gulp.task('server:test', function () {
+        var options = {
+            notify: false,
+            coverageHtml: paths.report,
+            bootstrap: files.bootstrap
+        };
+        return gulp.src(files.phpunit)
+            .pipe(phpunit('', options));
+    });
+}
+
 
 // Global tasks
 gulp.task('default', ['clean']);
 gulp.task(':clean', ['clean:deploy', 'clean:publish']);
 gulp.task(':publish', ['clean:publish', 'lint:publish', 'copy:publish']);
 gulp.task(':deploy', ['clean:deploy', 'lint:deploy', 'copy:deploy', 'base:deploy', 'zip:deploy']);
+gulp.task(':test', ['server:test']);
