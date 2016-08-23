@@ -34,7 +34,7 @@ class DownloaderTest extends \PHPUnit_Framework_TestCase
 
     public function testTest()
     {
-        $this->assertEquals(0, 0);
+        $this->assertEquals(0, 1);
     }
 }
 

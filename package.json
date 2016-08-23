@@ -11,14 +11,15 @@
     "gulp-jshint": "^2.0.1",
     "gulp-minify-css": "^1.2.4",
     "gulp-rename": "^1.2.2",
-    "gulp-uglify": "^1.5.3",
+    "gulp-uglify": "^2.0.0",
     "gulp-usemin": "^0.3.23",
     "gulp-zip": "^3.2.0",
     "jshint": "^2.9.2",
     "jshint-stylish": "^2.2.0"
   },
   "devDependencies": {
-    "gulp-phpunit": "^0.16.0"
+    "gulp-phpunit": "^0.17.0",
+    "gulp-util": "^3.0.7"
   },
   "scripts": {
     "test": "gulp :test",

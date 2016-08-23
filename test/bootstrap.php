@@ -1,6 +1,6 @@
 <?php
 
-// phpunit --coverage-html=./report --bootstrap=./bootstrap.php
+// phpunit --configuration=./test/phpunit.xml --coverage-html=./report --bootstrap=./test/bootstrap.php
 
 printf("\nStarting 'bootstrap'...\n");
 

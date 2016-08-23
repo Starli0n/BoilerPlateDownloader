@@ -130,7 +130,11 @@ if (process.env.NODE_ENV !== 'production') {
             bootstrap: files.bootstrap
         };
         return gulp.src(files.phpunit)
-            .pipe(phpunit('', options));
+            .pipe(phpunit('', options, function(error, success) {
+                if (error != null) {
+                    process.exit(1);
+                }
+            }));
     });
 }
 
