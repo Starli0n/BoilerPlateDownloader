@@ -1,5 +1,8 @@
 # BoilerPlateDownloader
 
+[![Heroku](https://heroku-badge.herokuapp.com/?app=boilerplatedownloader&style=flat)](https://boilerplatedownloader.herokuapp.com)
+[ ![Codeship Status for Starli0n/BoilerPlateDownloader](https://codeship.com/projects/5c379690-4b5e-0134-e294-3eedfb4d574d/status?branch=master)](https://codeship.com/projects/169900)
+
 Download files with a boiler plate server using a REST Api.
 
 * `[GET] /hello/{name}` return `Hello <name>` message
