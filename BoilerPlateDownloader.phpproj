@@ -47,6 +47,9 @@
     <Folder Include="src" />
     <Folder Include="src\api\" />
     <Folder Include="templates" />
+    <Folder Include="test" />
+    <Folder Include="test\src\" />
+    <Folder Include="test\src\api\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include=".bowerrc" />

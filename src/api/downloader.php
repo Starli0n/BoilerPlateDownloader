@@ -61,10 +61,10 @@ class Downloader
         $this->downloadFile = $this->downloadDirectory . $baseName;
         $low = strtolower($fileUrl);
 
-        if ($this->startsWith($low, "http"))
+        if ($this->startsWith($low, 'http'))
             return true;
 
-        if ($this->startsWith($low, "ftp"))
+        if ($this->startsWith($low, 'ftp'))
             return true;
 
         return false;
@@ -72,11 +72,11 @@ class Downloader
 
     public function downloadRemoteFile(): bool
     {
-        $content = file_get_contents($this->fileUrl);
-        if ($content) {
-            return file_put_contents($this->filePath, $content);
+        $content = @file_get_contents($this->fileUrl);
+        if ($content === false) {
+            return false;
         }
-        return false;
+        return file_put_contents($this->filePath, $content);
     }
 
     public function listDir(): array
