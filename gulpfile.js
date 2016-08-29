@@ -54,7 +54,8 @@ files = {
         '!logs/**'],
     js: ['**/*.js'].concat(files.exclude),
     phpunit: paths.test + '/phpunit.xml',
-    bootstrap: './' + paths.test + '/bootstrap.php'
+    bootstrap: './' + paths.test + '/bootstrap.php',
+    clover: './' + paths.report + '/clover.xml'
 };
 
 
@@ -127,6 +128,7 @@ if (process.env.NODE_ENV !== 'production') {
         var options = {
             notify: false,
             coverageHtml: paths.report,
+            coverageClover: files.clover,
             bootstrap: files.bootstrap
         };
         return gulp.src(files.phpunit)

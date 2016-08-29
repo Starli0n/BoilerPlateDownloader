@@ -2,6 +2,7 @@
 
 [![Heroku](https://heroku-badge.herokuapp.com/?app=boilerplatedownloader)](https://boilerplatedownloader.herokuapp.com)
 [![Codeship Status for Starli0n/BoilerPlateDownloader](https://codeship.com/projects/5c379690-4b5e-0134-e294-3eedfb4d574d/status?branch=master)](https://codeship.com/projects/169900)
+[![Coverage Status](https://coveralls.io/repos/github/Starli0n/BoilerPlateDownloader/badge.svg?branch=master)](https://coveralls.io/github/Starli0n/BoilerPlateDownloader?branch=master)
 
 Download files with a boiler plate server using a REST Api.
 
