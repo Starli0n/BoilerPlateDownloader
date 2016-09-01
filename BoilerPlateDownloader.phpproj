@@ -12,6 +12,10 @@
     <RuntimeVersion>7.0</RuntimeVersion>
     <StartAction>SpecificPage</StartAction>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'debug' ">
+    <IncludeDebugInformation>true</IncludeDebugInformation>
+    <SpecificPageValue>test/debug.php</SpecificPageValue>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'public' ">
     <IncludeDebugInformation>true</IncludeDebugInformation>
     <SpecificPageValue>public/index.html</SpecificPageValue>
@@ -29,6 +33,7 @@
     <Compile Include="public\api\index.php" />
     <Compile Include="public\index.html" />
     <Compile Include="src\api\downloader.php" />
+    <Compile Include="src\api\router.php" />
     <Compile Include="src\dependencies.php" />
     <Compile Include="src\middleware.php" />
     <Compile Include="src\routes.php" />
@@ -38,6 +43,10 @@
     <Compile Include="composer.json" />
     <Compile Include="composer.lock" />
     <Compile Include="README.md" />
+    <Compile Include="test\bootstrap.php" />
+    <Compile Include="test\debug.php" />
+    <Compile Include="test\src\api\downloaderTest.php" />
+    <Compile Include="test\src\api\routerTest.php" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="logs" />
@@ -59,5 +68,7 @@
     <Content Include="package.json" />
     <Content Include="public\api\.htaccess" />
     <Content Include="public\script\bpd.js" />
+    <Content Include="test\.coveralls.yml" />
+    <Content Include="test\phpunit.xml" />
   </ItemGroup>
 </Project>

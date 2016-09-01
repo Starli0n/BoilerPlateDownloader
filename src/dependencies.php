@@ -27,7 +27,8 @@ $container['api'] = function ($c) {
 // Error handler
 $container['errorHandler'] = function ($c) {
     return function ($request, $response, $exception) use ($c) {
-        $data = array('message' => 'Internal error');
+        $c->logger->error('Internal Server Error');
+        $data = array('message' => 'Internal Server Error');
         return $c['response']->withJson($data, 500);
     };
 };

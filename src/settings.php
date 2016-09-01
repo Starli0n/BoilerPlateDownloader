@@ -10,7 +10,7 @@ return [
 
         // Monolog settings
         'logger' => [
-            'name' => 'slim-app',
+            'name' => 'bpd',
             'path' => __DIR__ . '/../logs/app.log',
         ],
 

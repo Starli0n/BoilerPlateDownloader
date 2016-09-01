@@ -1,26 +1,18 @@
 <?php
 
-namespace BoilerPlateDownloader\Api;
+namespace BoilerPlateDownloader\Test\Api;
 
-$settings = require __DIR__ . '/../../../src/settings.php';
+use BoilerPlateDownloader\Api\Downloader;
 
 class DownloaderTest extends \PHPUnit_Framework_TestCase
 {
     private static $settings;
-    private static $webAddress;
     private $downloader;
-
-    public static function main()
-    {
-        $Suite = new \PHPUnit_Framework_TestSuite('BoilerPlateDownloader\Api\DownloaderTest');
-        \PHPUnit_TextUI_TestRunner::run($Suite);
-        unset($Suite);
-    }
 
     public static function setUpBeforeClass()
     {
-        global $settings;
-        self::$settings = $settings['settings']['api'];
+        self::$settings = require PROJECT_ROOT . '/src/settings.php';
+        self::$settings = self::$settings['settings']['api'];
     }
 
     protected function setUp()
@@ -66,35 +58,31 @@ class DownloaderTest extends \PHPUnit_Framework_TestCase
 
     public function testListDir()
     {
-        $file = $this->downloader->listDir();
-        $this->downloader->deleteFiles($file);
+        $files = $this->downloader->listDir();
+        $this->downloader->deleteFiles($files);
         $this->downloader->setFileUrl(WEB_SERVER_ADDRESS . '/site.min.js');
         $this->downloader->downloadRemoteFile();
-        $file = $this->downloader->listDir();
-        $this->assertEquals(count($file), 1);
-        $this->assertEquals($file[0], 'site.min.js.zip');
+        $files = $this->downloader->listDir();
+        $this->assertEquals(1, count($files));
+        $this->assertEquals('site.min.js.zip', $files[0]);
     }
 
     public function testDeleteFiles()
     {
-        $file = $this->downloader->listDir();
-        $this->downloader->deleteFiles($file);
-        $file = $this->downloader->listDir();
-        $this->assertEquals(count($file), 0);
+        $files = $this->downloader->listDir();
+        $this->downloader->deleteFiles($files);
+        $files = $this->downloader->listDir();
+        $this->assertEquals(0, count($files));
     }
 
     public function testGetDownloadDirectory()
     {
-        $this->assertEquals($this->downloader->getDownloadDirectory(), 'download/');
+        $this->assertEquals('download/', $this->downloader->getDownloadDirectory());
     }
 
     public function testGetDownloadFile()
     {
         $this->downloader->setFileUrl(WEB_SERVER_ADDRESS . '/site.min.js');
-        $this->assertEquals($this->downloader->getDownloadFile(), 'download/site.min.js.zip');
+        $this->assertEquals('download/site.min.js.zip', $this->downloader->getDownloadFile());
     }
-}
-
-if (defined('PHPUnit_Static_Main')) {
-    DownloaderTest::main();
 }

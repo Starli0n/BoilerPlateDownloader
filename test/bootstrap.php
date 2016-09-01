@@ -2,18 +2,27 @@
 
 // phpunit --configuration=./test/phpunit.xml --coverage-html=./report --coverage-clover=./report/clover.xml --bootstrap=./test/bootstrap.php
 
-printf("\nStarting 'bootstrap'...\n");
+// Settings to make all errors more obvious during testing
+error_reporting(-1);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+date_default_timezone_set('UTC');
 
-require __DIR__ . '/../vendor/autoload.php';
+echo PHP_EOL . sprintf('Starting \'bootstrap\'...') . PHP_EOL;
 
+define('PROJECT_ROOT', realpath(__DIR__ . '/..'));
+define("WEB_SERVER_HOST", 'localhost');
+define("WEB_SERVER_PORT", '8090');
+define("WEB_SERVER_DOCROOT", './publish/');
 define("WEB_SERVER_ADDRESS", sprintf('http://%s:%s', WEB_SERVER_HOST, WEB_SERVER_PORT));
+define('REPORT_DIR', PROJECT_ROOT . '/report');
 
-$report = 'report';
+require PROJECT_ROOT . '/vendor/autoload.php';
 
 function delTree($dir)
 {
     if (!file_exists($dir)) {
-        return;
+        return false;
     }
 
     $it = new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS);
@@ -26,8 +35,7 @@ function delTree($dir)
         }
     }
     rmdir($dir);
-
-    printf("  > '%s' deleted\n", $dir);
+    return true;
 }
 
 function phpServe()
@@ -41,7 +49,7 @@ function phpServe()
             'wmic process call create "php -S %s:%d -t %s" | find "ProcessId"',
             WEB_SERVER_HOST,
             WEB_SERVER_PORT,
-            __DIR__ . '/../' . WEB_SERVER_DOCROOT
+            realpath(PROJECT_ROOT . '/' . WEB_SERVER_DOCROOT)
         );
         $killCommand = 'taskkill /f /pid ';
     } else {
@@ -87,7 +95,38 @@ function phpServe()
     });
 }
 
-delTree(__DIR__ . '/../' . $report);
+class LocalWebTestCase extends There4\Slim\Test\WebTestCase
+{
+    public function getSlimInstance()
+    {
+        // Instantiate the app
+        $settings = require PROJECT_ROOT . '/src/settings.php';
+        $app = new \Slim\App($settings);
+
+        // Set up dependencies
+        require PROJECT_ROOT . '/src/dependencies.php';
+
+        // Register middleware
+        require PROJECT_ROOT . '/src/middleware.php';
+
+        // Register routes
+        require PROJECT_ROOT . '/src/routes.php';
+
+        // Route for testing server internal error (ie: $container['errorHandler'])
+        $app->get('/internalerror', function ($request, $response, $args) {
+            $this->logger->info("Route '/' internalerror");
+            throw new Exception('Testing /internalerror.');
+            return $response;
+        });
+
+        return $app;
+    }
+}
+
+if (delTree(REPORT_DIR)) {
+    echo sprintf('  > \'%s\' deleted', REPORT_DIR) . PHP_EOL;
+}
 phpServe();
 
-printf("Finished 'bootstrap'\n\n");
+echo sprintf('Finished \'bootstrap\'') . PHP_EOL . PHP_EOL;
+

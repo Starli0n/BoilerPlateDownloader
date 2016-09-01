@@ -7,11 +7,13 @@ Project("{A0786B88-2ADB-4C21-ABE8-AA2D79766269}") = "BoilerPlateDownloader", "Bo
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		debug|Any CPU = debug|Any CPU
 		deploy|Any CPU = deploy|Any CPU
 		public|Any CPU = public|Any CPU
 		publish|Any CPU = publish|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{603ADF53-CC72-4B25-BC07-868E085DF736}.debug|Any CPU.ActiveCfg = debug|Any CPU
 		{603ADF53-CC72-4B25-BC07-868E085DF736}.deploy|Any CPU.ActiveCfg = deploy|Any CPU
 		{603ADF53-CC72-4B25-BC07-868E085DF736}.public|Any CPU.ActiveCfg = public|Any CPU
 		{603ADF53-CC72-4B25-BC07-868E085DF736}.publish|Any CPU.ActiveCfg = publish|Any CPU
