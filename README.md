@@ -1,7 +1,8 @@
 # BoilerPlateDownloader
 
-[![Heroku](https://heroku-badge.herokuapp.com/?app=boilerplatedownloader)](https://boilerplatedownloader.herokuapp.com)
-[![Codeship Status for Starli0n/BoilerPlateDownloader](https://codeship.com/projects/5c379690-4b5e-0134-e294-3eedfb4d574d/status?branch=master)](https://codeship.com/projects/169900)
+[![Heroku App](https://heroku-badge.herokuapp.com/?app=boilerplatedownloader)](https://boilerplatedownloader.herokuapp.com)
+[![Codeship Status](https://codeship.com/projects/5c379690-4b5e-0134-e294-3eedfb4d574d/status?branch=master)](https://codeship.com/projects/169900)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/f4f3457a-524b-434b-aa0d-7efc5dd5498b/mini.png)](https://insight.sensiolabs.com/projects/f4f3457a-524b-434b-aa0d-7efc5dd5498b)
 [![Coverage Status](https://coveralls.io/repos/github/Starli0n/BoilerPlateDownloader/badge.svg?branch=master)](https://coveralls.io/github/Starli0n/BoilerPlateDownloader?branch=master)
 [![Dependency Status](https://www.versioneye.com/user/projects/57c43069968d640039516a23/badge.svg?style=flat)](https://www.versioneye.com/user/projects/57c43069968d640039516a23)
 
