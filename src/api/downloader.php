@@ -50,7 +50,8 @@ class Downloader
     public function endsWith($haystack, $needle): bool
     {
         // search forward starting from end minus needle length characters
-        return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== false);
+        return $needle === ""
+            || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== false);
     }
 
     public function setFileUrl(string $fileUrl): bool
@@ -61,11 +62,9 @@ class Downloader
         $this->downloadFile = $this->downloadDirectory . $baseName;
         $low = strtolower($fileUrl);
 
-        if ($this->startsWith($low, 'http'))
+        if ($this->startsWith($low, 'http') || $this->startsWith($low, 'ftp')) {
             return true;
-
-        if ($this->startsWith($low, 'ftp'))
-            return true;
+        }
 
         return false;
     }

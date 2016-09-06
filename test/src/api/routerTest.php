@@ -3,8 +3,9 @@
 namespace BoilerPlateDownloader\Test\Api;
 
 use BoilerPlateDownloader\Api\Router;
+use BoilerPlateDownloader\Test\LocalWebTestCase;
 
-class RouterTest extends \LocalWebTestCase
+class RouterTest extends LocalWebTestCase
 {
     public function testHello()
     {

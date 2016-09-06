@@ -120,9 +120,20 @@ gulp.task('zip:deploy', ['base:deploy'], function () {
 
 if (process.env.NODE_ENV !== 'production') {
     var composer = require("gulp-composer");
+    var cpr_opt = {
+            async: false
+        };
 
-    gulp.task("server:test", function () {
-        composer('test');
+    gulp.task('server:test', function () {
+        composer('test', cpr_opt);
+    });
+
+    gulp.task('server:cover', function () {
+        composer('cover', cpr_opt);
+    });
+
+    gulp.task('server:sniff', function () {
+        composer('sniff', cpr_opt);
     });
 }
 
@@ -132,4 +143,4 @@ gulp.task('default', ['clean']);
 gulp.task(':clean', ['clean:deploy', 'clean:publish']);
 gulp.task(':publish', ['clean:publish', 'lint:publish', 'copy:publish']);
 gulp.task(':deploy', ['clean:deploy', 'lint:deploy', 'copy:deploy', 'base:deploy', 'zip:deploy']);
-gulp.task(':test', ['server:test']);
+gulp.task(':test', ['server:test', 'server:cover', 'server:sniff']);

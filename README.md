@@ -20,11 +20,14 @@ Start with the next chapiter if it is your first intall and if node.js is not in
 ```
 > git clone https://github.com/Starli0n/BoilerPlateDownloader boilerplatedownloader
 > cd boilerplatedownloader
-> composer update
+> composer install
 > npm install
 > bower install
 > gulp :deploy
 > gulp :test
+	+ composer test
+	+ composer cover
+	+ composer sniff
 ```
 
 For PHP Tools for Visual Studio

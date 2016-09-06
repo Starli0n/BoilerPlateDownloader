@@ -17,7 +17,11 @@ class DownloaderTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->downloader = new Downloader(self::$settings['download_path'], self::$settings['download_directory'], self::$settings['extension']);
+        $this->downloader = new Downloader(
+            self::$settings['download_path'],
+            self::$settings['download_directory'],
+            self::$settings['extension']
+        );
     }
 
     protected function tearDown()

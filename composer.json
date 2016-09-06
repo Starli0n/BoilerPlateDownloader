@@ -30,9 +30,12 @@
         "squizlabs/php_codesniffer": "^2.7"
     },
     "scripts": {
-        "build": "composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction",
+        "build": "composer install --prefer-dist --optimize-autoloader --no-interaction --no-dev",
+        "build-dev": "composer install --prefer-dist --optimize-autoloader --no-interaction",
         "test": "php vendor/phpunit/phpunit/phpunit --verbose --configuration=./test/phpunit.xml --coverage-text --coverage-html=./report --coverage-clover=./report/clover.xml --bootstrap=./test/bootstrap.php",
-        "sniff": "php vendor/squizlabs/php_codesniffer/scripts/phpcs --standard=PSR2 --extensions=php src test",
-        "fix": "php vendor/squizlabs/php_codesniffer/scripts/phpcbf --standard=PSR2 --extensions=php controllers models routes src tests"
+        "cover": "php vendor/satooshi/php-coveralls/bin/coveralls --config ./test/.coveralls.yml",
+        "debug": "php test/debug.php",
+        "sniff": "php vendor/squizlabs/php_codesniffer/scripts/phpcs --standard=PSR2 --extensions=php public/api src test",
+        "fix": "php vendor/squizlabs/php_codesniffer/scripts/phpcbf --no-patch --standard=PSR2 --extensions=php public/api src test"
     }
 }
