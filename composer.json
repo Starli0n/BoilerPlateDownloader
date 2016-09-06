@@ -1,14 +1,14 @@
 {
-    "name": "slim/slim-skeleton",
-    "description": "A Slim Framework skeleton application for rapid development",
-    "keywords": ["microframework","rest","router", "psr7"],
-    "homepage": "http://github.com/slimphp/Slim-Skeleton",
+    "name": "Starli0n/BoilerPlateDownloader",
+    "description": "Download file to a boiler plate server",
+    "keywords": ["slim", "microframework", "rest", "router", "psr7"],
+    "homepage": "https://github.com/Starli0n/BoilerPlateDownloader#readme",
     "license": "MIT",
     "authors": [
         {
-            "name": "Josh Lockhart",
-            "email": "info@joshlockhart.com",
-            "homepage": "http://www.joshlockhart.com/"
+            "name": "Starli0n",
+            "email": "Starli0n@users.noreply.github.com",
+            "homepage": "https://github.com/Starli0n"
         }
     ],
     "require": {
@@ -26,6 +26,13 @@
     "require-dev": {
         "phpunit/phpunit": "^5.5",
         "satooshi/php-coveralls": "^1.0",
-        "there4/slim-test-helpers": "^2.1"
+        "there4/slim-test-helpers": "^2.1",
+        "squizlabs/php_codesniffer": "^2.7"
+    },
+    "scripts": {
+        "build": "composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction",
+        "test": "php vendor/phpunit/phpunit/phpunit --verbose --configuration=./test/phpunit.xml --coverage-text --coverage-html=./report --coverage-clover=./report/clover.xml --bootstrap=./test/bootstrap.php",
+        "sniff": "php vendor/squizlabs/php_codesniffer/scripts/phpcs --standard=PSR2 --extensions=php src test",
+        "fix": "php vendor/squizlabs/php_codesniffer/scripts/phpcbf --standard=PSR2 --extensions=php controllers models routes src tests"
     }
 }

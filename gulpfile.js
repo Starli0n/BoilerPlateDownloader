@@ -127,6 +127,7 @@ if (process.env.NODE_ENV !== 'production') {
     gulp.task('server:test', function () {
         var options = {
             notify: false,
+            verbose: true,
             coverageHtml: paths.report,
             coverageClover: files.clover,
             bootstrap: files.bootstrap
