@@ -1,7 +1,5 @@
 <?php
 
-// phpunit --configuration=./test/phpunit.xml --coverage-html=./report --coverage-clover=./report/clover.xml --bootstrap=./test/bootstrap.php
-
 // Settings to make all errors more obvious during testing
 error_reporting(-1);
 ini_set('display_errors', 1);

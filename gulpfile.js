@@ -52,10 +52,7 @@ files = {
         'vendor/**/*',
         'logs',
         '!logs/**'],
-    js: ['**/*.js'].concat(files.exclude),
-    phpunit: paths.test + '/phpunit.xml',
-    bootstrap: './' + paths.test + '/bootstrap.php',
-    clover: './' + paths.report + '/clover.xml'
+    js: ['**/*.js'].concat(files.exclude)
 };
 
 
@@ -122,22 +119,10 @@ gulp.task('zip:deploy', ['base:deploy'], function () {
 });
 
 if (process.env.NODE_ENV !== 'production') {
-    var phpunit = require('gulp-phpunit');
+    var composer = require("gulp-composer");
 
-    gulp.task('server:test', function () {
-        var options = {
-            notify: false,
-            verbose: true,
-            coverageHtml: paths.report,
-            coverageClover: files.clover,
-            bootstrap: files.bootstrap
-        };
-        return gulp.src(files.phpunit)
-            .pipe(phpunit('', options, function(error, success) {
-                if (error != null) {
-                    process.exit(1);
-                }
-            }));
+    gulp.task("server:test", function () {
+        composer('test');
     });
 }
 

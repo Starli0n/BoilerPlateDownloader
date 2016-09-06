@@ -18,7 +18,7 @@
     "jshint-stylish": "^2.2.0"
   },
   "devDependencies": {
-    "gulp-phpunit": "^0.17.0",
+    "gulp-composer": "^0.4.0",
     "gulp-util": "^3.0.7"
   },
   "scripts": {
@@ -30,9 +30,11 @@
     "url": "git+https://Starli0n@github.com/Starli0n/BoilerPlateDownloader.git"
   },
   "keywords": [
-    "rest",
     "slim",
-    "framework"
+    "microframework",
+    "rest",
+    "router",
+    "psr7"
   ],
   "author": "Starli0n <Starli0n@users.noreply.github.com>",
   "license": "MIT",
