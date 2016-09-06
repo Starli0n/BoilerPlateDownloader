@@ -47,6 +47,7 @@
     <Compile Include="test\debug.php" />
     <Compile Include="test\src\api\downloaderTest.php" />
     <Compile Include="test\src\api\routerTest.php" />
+    <Compile Include="test\tools.php" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="logs" />

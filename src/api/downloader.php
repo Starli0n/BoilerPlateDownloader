@@ -71,8 +71,9 @@ class Downloader
 
     public function downloadRemoteFile(): bool
     {
-        $content = @file_get_contents($this->fileUrl);
-        if ($content === false) {
+        try {
+            $content = file_get_contents($this->fileUrl);
+        } catch (\Exception $exception) {
             return false;
         }
         return file_put_contents($this->filePath, $content);

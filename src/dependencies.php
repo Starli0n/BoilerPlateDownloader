@@ -4,13 +4,13 @@
 $container = $app->getContainer();
 
 // view renderer
-$container['renderer'] = function ($c) {
+$container['renderer'] = function (Slim\Container $c) {
     $settings = $c->get('settings')['renderer'];
     return new Slim\Views\PhpRenderer($settings['template_path']);
 };
 
 // monolog
-$container['logger'] = function ($c) {
+$container['logger'] = function (Slim\Container $c) {
     $settings = $c->get('settings')['logger'];
     $logger = new Monolog\Logger($settings['name']);
     $logger->pushProcessor(new Monolog\Processor\UidProcessor());
@@ -19,7 +19,7 @@ $container['logger'] = function ($c) {
 };
 
 // BoilerPlateDownloader
-$container['api'] = function ($c) {
+$container['api'] = function (Slim\Container $c) {
     $settings = $c->get('settings')['api'];
     return new BoilerPlateDownloader\Api\Downloader(
         $settings['download_path'],
@@ -29,7 +29,7 @@ $container['api'] = function ($c) {
 };
 
 // Error handler
-$container['errorHandler'] = function ($c) {
+$container['errorHandler'] = function (Slim\Container $c) {
     return function ($request, $response, $exception) use ($c) {
         $c->logger->error('Internal Server Error');
         $data = array('message' => 'Internal Server Error');

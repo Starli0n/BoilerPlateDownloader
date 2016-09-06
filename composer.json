@@ -1,5 +1,5 @@
 {
-    "name": "Starli0n/BoilerPlateDownloader",
+    "name": "starli0n/boilerplatedownloader",
     "description": "Download file to a boiler plate server",
     "keywords": ["slim", "microframework", "rest", "router", "psr7"],
     "homepage": "https://github.com/Starli0n/BoilerPlateDownloader#readme",

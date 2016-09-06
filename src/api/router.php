@@ -2,24 +2,21 @@
 
 namespace BoilerPlateDownloader\Api;
 
+use Slim\Http\Request;
+use Slim\Http\Response;
+
 class Router
 {
-    /**
-     * @var ContainerInterface
-     */
-    private $ci;
-
     private $logger;
     private $api;
 
     public function __construct(\Interop\Container\ContainerInterface $ci)
     {
-        $this->ci = $ci;
         $this->logger = $ci->logger;
         $this->api = $ci->api;
     }
 
-    public function hello($request, $response, $args): \Psr\Http\Message\ResponseInterface
+    public function hello(Request $request, Response $response, array $args): Response
     {
         // Sample log message
         $this->logger->info("Route '/' hello");
@@ -31,7 +28,7 @@ class Router
         return $response;
     }
 
-    public function list($request, $response, $args): \Psr\Http\Message\ResponseInterface
+    public function list(Request $request, Response $response, array $args): Response
     {
         $this->logger->info("Route '/' list");
 
@@ -43,7 +40,7 @@ class Router
         return $response->withJson($data);
     }
 
-    public function download($request, $response, $args): \Psr\Http\Message\ResponseInterface
+    public function download(Request $request, Response $response, array $args): Response
     {
         $this->logger->info("Route '/' download");
 
@@ -71,7 +68,7 @@ class Router
         return $response->withJson($data, 201);
     }
 
-    public function delete($request, $response, $args): \Psr\Http\Message\ResponseInterface
+    public function delete(Request $request, Response $response, array $args): Response
     {
         $this->logger->info("Route '/' delete");
 

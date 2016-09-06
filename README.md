@@ -5,6 +5,7 @@
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/f4f3457a-524b-434b-aa0d-7efc5dd5498b/mini.png)](https://insight.sensiolabs.com/projects/f4f3457a-524b-434b-aa0d-7efc5dd5498b)
 [![Coverage Status](https://coveralls.io/repos/github/Starli0n/BoilerPlateDownloader/badge.svg?branch=master)](https://coveralls.io/github/Starli0n/BoilerPlateDownloader?branch=master)
 [![Dependency Status](https://www.versioneye.com/user/projects/57c43069968d640039516a23/badge.svg?style=flat)](https://www.versioneye.com/user/projects/57c43069968d640039516a23)
+[![Heroku Log](https://img.shields.io/badge/heroku-log-blue.svg)](https://dashboard.heroku.com/apps/boilerplatedownloader)
 
 Download files with a boiler plate server using a REST Api.
 
