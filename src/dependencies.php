@@ -36,3 +36,12 @@ $container['errorHandler'] = function (Slim\Container $c) {
         return $c['response']->withJson($data, 500);
     };
 };
+
+// php Error handler
+$container['phpErrorHandler'] = function (Slim\Container $c) {
+    return function ($request, $response, $exception) use ($c) {
+        $c->logger->error('Internal Server Critical Error');
+        $data = array('message' => 'Internal Server Critical Error');
+        return $c['response']->withJson($data, 500);
+    };
+};

@@ -98,4 +98,15 @@ class RouterTest extends LocalWebTestCase
         $data = json_decode($response->getBody());
         $this->assertEquals('Internal Server Error', $data->message);
     }
+
+    public function testInternalCriticalError()
+    {
+        $this->client->get('/internalcriticalerror');
+        $response = $this->client->response;
+        $this->assertEquals(500, $response->getStatusCode());
+        $this->assertEquals('Internal Server Error', $response->getReasonPhrase());
+        $this->assertEquals('application/json;charset=utf-8', $response->getHeader('Content-Type')[0]);
+        $data = json_decode($response->getBody());
+        $this->assertEquals('Internal Server Critical Error', $data->message);
+    }
 }

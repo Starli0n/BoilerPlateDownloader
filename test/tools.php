@@ -30,9 +30,9 @@ function loadBootstrapEnv($bBuildInServer = true)
     echo sprintf('Finished \'bootstrap\'') . PHP_EOL . PHP_EOL;
 }
 
-function loadDebugEnv()
+function loadDebugEnv($bBuildInServer = true)
 {
-    loadBootstrapEnv();
+    loadBootstrapEnv($bBuildInServer);
     header('Content-type: text/plain');
     define('PHPUNIT_TESTSUITE', true); // Prevent the output to be flushed by ob_clean() inside the framework
 }
@@ -137,20 +137,34 @@ class LocalWebTestCase extends \There4\Slim\Test\WebTestCase
             return $response;
         });
 
+        // Route for testing server internal error (ie: $container['errorHandler'])
+        $app->get('/internalcriticalerror', function ($request, $response, $args) {
+            $this->logger->info("Route '/' internalcriticalerror");
+            throw new \Throwable('Testing /internalcriticalerror.');
+            return $response;
+        });
+
         return $app;
     }
 }
 
-function debugTestRunner($classTestName, $testMethodName = '')
+function debugTestRunner($classTestName, $testMethodNames = null)
 {
     // Resolve namespace
     if ($classTestName[0] != '\\') {
         $classTestName = __NAMESPACE__ . '\\' . $classTestName;
     }
 
-    if ($testMethodName != '') { // Run only one test of the classTest
+    if ($testMethodNames != null) { // Run only selected tests of the classTest
+        if (is_string($testMethodNames)) {
+            $testMethodNames = array($testMethodNames);
+        }
+
         $suite = new \PHPUnit_Framework_TestSuite();
-        $suite->addTest(new $classTestName($testMethodName));
+        foreach ($testMethodNames as $testMethodName) {
+            $suite->addTest(new $classTestName($testMethodName));
+        }
+        unset($testMethodName);
     } else { // Run all tests of the classTest
         $suite = new \PHPUnit_Framework_TestSuite(new \ReflectionClass($classTestName));
     }
