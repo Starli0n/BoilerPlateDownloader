@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "62a38528baeaaffcbf96b2c964701eff",
-    "content-hash": "a862bd6298263e9803ecd1d75fb56d86",
+    "hash": "1ab079422ef89dca67a5d99f22e60f22",
+    "content-hash": "c78b5c862ce496f9fbd57d1df151f9f8",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -340,16 +340,16 @@
         },
         {
             "name": "slim/slim",
-            "version": "3.5.0",
+            "version": "3.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/slimphp/Slim.git",
-                "reference": "184352bc1913d7ba552ab4131d62f4730ddb0893"
+                "url": "https://github.com/Starli0n/F_Slim.git",
+                "reference": "20471eaecc6349cb141b54486f182fd35e51ebab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/slimphp/Slim/zipball/184352bc1913d7ba552ab4131d62f4730ddb0893",
-                "reference": "184352bc1913d7ba552ab4131d62f4730ddb0893",
+                "url": "https://api.github.com/repos/Starli0n/F_Slim/zipball/20471eaecc6349cb141b54486f182fd35e51ebab",
+                "reference": "20471eaecc6349cb141b54486f182fd35e51ebab",
                 "shasum": ""
             },
             "require": {
@@ -372,30 +372,41 @@
                     "Slim\\": "Slim"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "test": [
+                    "@phpunit",
+                    "@phpcs"
+                ],
+                "phpunit": [
+                    "php vendor/bin/phpunit"
+                ],
+                "phpcs": [
+                    "php vendor/bin/phpcs"
+                ]
+            },
             "license": [
                 "MIT"
             ],
             "authors": [
-                {
-                    "name": "Rob Allen",
-                    "email": "rob@akrabat.com",
-                    "homepage": "http://akrabat.com"
-                },
                 {
                     "name": "Josh Lockhart",
                     "email": "hello@joshlockhart.com",
                     "homepage": "https://joshlockhart.com"
                 },
                 {
-                    "name": "Gabriel Manricks",
-                    "email": "gmanricks@me.com",
-                    "homepage": "http://gabrielmanricks.com"
-                },
-                {
                     "name": "Andrew Smith",
                     "email": "a.smith@silentworks.co.uk",
                     "homepage": "http://silentworks.co.uk"
+                },
+                {
+                    "name": "Rob Allen",
+                    "email": "rob@akrabat.com",
+                    "homepage": "http://akrabat.com"
+                },
+                {
+                    "name": "Gabriel Manricks",
+                    "email": "gmanricks@me.com",
+                    "homepage": "http://gabrielmanricks.com"
                 }
             ],
             "description": "Slim is a PHP micro framework that helps you quickly write simple yet powerful web applications and APIs",
@@ -406,7 +417,10 @@
                 "micro",
                 "router"
             ],
-            "time": "2016-07-26 15:12:13"
+            "support": {
+                "source": "https://github.com/Starli0n/Slim/tree/3.x"
+            },
+            "time": "2016-09-07 17:26:33"
         }
     ],
     "packages-dev": [
@@ -2374,7 +2388,7 @@
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.8.10",
+            "version": "v2.8.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/event-dispatcher.git",
@@ -2704,23 +2718,23 @@
         },
         {
             "name": "there4/slim-test-helpers",
-            "version": "v2.1.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/there4/slim-test-helpers.git",
-                "reference": "6c3e622bb2276ece314e69bea810f3f6e7249ec2"
+                "url": "https://github.com/Starli0n/f-slim-test-helpers.git",
+                "reference": "fda0179b13a6fb2d2195603c9d7707207f8f48b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/there4/slim-test-helpers/zipball/6c3e622bb2276ece314e69bea810f3f6e7249ec2",
-                "reference": "6c3e622bb2276ece314e69bea810f3f6e7249ec2",
+                "url": "https://api.github.com/repos/Starli0n/f-slim-test-helpers/zipball/fda0179b13a6fb2d2195603c9d7707207f8f48b4",
+                "reference": "fda0179b13a6fb2d2195603c9d7707207f8f48b4",
                 "shasum": ""
             },
             "require": {
                 "illuminate/database": ">=4.0",
                 "phpunit/dbunit": "2.*",
                 "phpunit/phpunit": "^4.8|5.*",
-                "slim/slim": "3.*"
+                "slim/slim": "~3.1"
             },
             "require-dev": {
                 "codeclimate/php-test-reporter": "^0.3",
@@ -2732,7 +2746,22 @@
                     "There4": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-0": {
+                    "There4Test": "tests/"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit --verbose --coverage-text"
+                ],
+                "sniff": [
+                    "vendor/bin/phpcs --standard=PSR2 --extensions=php src tests"
+                ],
+                "fix": [
+                    "vendor/bin/phpcbf --standard=PSR2 --extensions=php controllers models routes src tests"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -2751,7 +2780,11 @@
             "keywords": [
                 "slim"
             ],
-            "time": "2016-08-07 11:58:50"
+            "support": {
+                "issues": "https://github.com/there4/slim-test-helpers/issues",
+                "source": "https://github.com/there4/slim-test-helpers"
+            },
+            "time": "2016-09-05 15:09:33"
         },
         {
             "name": "webmozart/assert",
@@ -2806,7 +2839,10 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "slim/slim": 20,
+        "there4/slim-test-helpers": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
