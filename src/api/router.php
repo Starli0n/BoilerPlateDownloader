@@ -10,12 +10,15 @@ class Router
     private $logger;
     private $api;
 
-    public function __construct(\Interop\Container\ContainerInterface $ci)
+    public function __construct(\Interop\Container\ContainerInterface $container)
     {
-        $this->logger = $ci->logger;
-        $this->api = $ci->api;
+        $this->logger = $container->logger;
+        $this->api = $container->api;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     public function hello(Request $request, Response $response, array $args): Response
     {
         // Sample log message
@@ -28,7 +31,10 @@ class Router
         return $response;
     }
 
-    public function list(Request $request, Response $response, array $args): Response
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
+    public function listFiles(Request $request, Response $response, array $args): Response
     {
         $this->logger->info("Route '/' list");
 
@@ -40,6 +46,9 @@ class Router
         return $response->withJson($data);
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     public function download(Request $request, Response $response, array $args): Response
     {
         $this->logger->info("Route '/' download");
@@ -68,6 +77,9 @@ class Router
         return $response->withJson($data, 201);
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     public function delete(Request $request, Response $response, array $args): Response
     {
         $this->logger->info("Route '/' delete");

@@ -135,6 +135,10 @@ if (process.env.NODE_ENV !== 'production') {
     gulp.task('server:sniff', function () {
         composer('sniff', cpr_opt);
     });
+
+    gulp.task('server:md', function () {
+        composer('md', cpr_opt);
+    });
 }
 
 
@@ -143,4 +147,4 @@ gulp.task('default', ['clean']);
 gulp.task(':clean', ['clean:deploy', 'clean:publish']);
 gulp.task(':publish', ['clean:publish', 'lint:publish', 'copy:publish']);
 gulp.task(':deploy', ['clean:deploy', 'lint:deploy', 'copy:deploy', 'base:deploy', 'zip:deploy']);
-gulp.task(':test', ['server:test', 'server:cover', 'server:sniff']);
+gulp.task(':test', ['server:test', 'server:cover', 'server:sniff', 'server:md']);

@@ -2,6 +2,9 @@
 
 namespace BoilerPlateDownloader\Test;
 
+/**
+  * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+ */
 function loadBootstrapEnv($bBuildInServer = true)
 {
     echo PHP_EOL . sprintf('Starting \'bootstrap\'...') . PHP_EOL;
@@ -30,6 +33,9 @@ function loadBootstrapEnv($bBuildInServer = true)
     echo sprintf('Finished \'bootstrap\'') . PHP_EOL . PHP_EOL;
 }
 
+/**
+  * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+ */
 function loadDebugEnv($bBuildInServer = true)
 {
     loadBootstrapEnv($bBuildInServer);
@@ -37,14 +43,17 @@ function loadDebugEnv($bBuildInServer = true)
     define('PHPUNIT_TESTSUITE', true); // Prevent the output to be flushed by ob_clean() inside the framework
 }
 
+/**
+  * @SuppressWarnings(PHPMD.ElseExpression)
+ */
 function delTree($dir)
 {
     if (!file_exists($dir)) {
         return false;
     }
 
-    $it = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS);
-    $files = new \RecursiveIteratorIterator($it, \RecursiveIteratorIterator::CHILD_FIRST);
+    $iterator = new \RecursiveDirectoryIterator($dir, \RecursiveDirectoryIterator::SKIP_DOTS);
+    $files = new \RecursiveIteratorIterator($iterator, \RecursiveIteratorIterator::CHILD_FIRST);
     foreach ($files as $file) {
         if ($file->isDir()) {
             rmdir($file->getRealPath());
@@ -56,6 +65,9 @@ function delTree($dir)
     return true;
 }
 
+/**
+  * @SuppressWarnings(PHPMD.ElseExpression)
+ */
 function phpServe()
 {
     // OS detection
@@ -148,6 +160,10 @@ class LocalWebTestCase extends \There4\Slim\Test\WebTestCase
     }
 }
 
+/**
+  * @SuppressWarnings(PHPMD.ElseExpression)
+  * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 function debugTestRunner($classTestName, $testMethodNames = null)
 {
     // Resolve namespace
