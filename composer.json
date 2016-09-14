@@ -38,7 +38,8 @@
         "satooshi/php-coveralls": "^1.0",
         "there4/slim-test-helpers": "dev-master",
         "squizlabs/php_codesniffer": "^2.7",
-        "phpmd/phpmd": "^2.4"
+        "phpmd/phpmd": "^2.4",
+        "pdepend/pdepend": "^2.2"
     },
     "scripts": {
         "build": "composer install --prefer-dist --optimize-autoloader --no-interaction --no-dev",
@@ -49,6 +50,7 @@
         "sniff": "php vendor/squizlabs/php_codesniffer/scripts/phpcs --standard=PSR2 --extensions=php public/api src test",
         "fix": "php vendor/squizlabs/php_codesniffer/scripts/phpcbf --no-patch --standard=PSR2 --extensions=php public/api src test",
         "md": "php vendor/phpmd/phpmd/src/bin/phpmd public/api,src,test text cleancode,codesize,controversial,design,naming,unusedcode",
-        "md_html": "php vendor/phpmd/phpmd/src/bin/phpmd public/api,src,test html cleancode,codesize,controversial,design,naming,unusedcode --reportfile report/phpmd.html"
+        "md_html": "php vendor/phpmd/phpmd/src/bin/phpmd public/api,src,test html cleancode,codesize,controversial,design,naming,unusedcode --reportfile report/phpmd.html",
+        "dp": "php vendor/pdepend/pdepend/src/bin/pdepend --dependency-xml=report/dependency.xml --summary-xml=report/summary.xml --jdepend-chart=report/jdepend.svg --overview-pyramid=report/pyramid.svg public/api,src,test"
     }
 }
