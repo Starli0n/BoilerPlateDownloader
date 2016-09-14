@@ -41,7 +41,8 @@
         "phpmd/phpmd": "^2.4",
         "pdepend/pdepend": "^2.2",
         "phploc/phploc": "^3.0",
-        "sebastian/phpcpd": "^2.0"
+        "sebastian/phpcpd": "^2.0",
+        "phpmetrics/phpmetrics": "^1.10"
     },
     "scripts": {
         "build": "composer install --prefer-dist --optimize-autoloader --no-interaction --no-dev",
@@ -55,6 +56,7 @@
         "md_html": "php vendor/phpmd/phpmd/src/bin/phpmd public/api,src,test html cleancode,codesize,controversial,design,naming,unusedcode --reportfile report/phpmd.html",
         "dp": "php vendor/pdepend/pdepend/src/bin/pdepend --dependency-xml=report/dependency.xml --summary-xml=report/summary.xml --jdepend-chart=report/jdepend.svg --overview-pyramid=report/pyramid.svg public/api,src,test",
         "loc": "php vendor/phploc/phploc/phploc public/api src",
-        "cpd": "php vendor/sebastian/phpcpd/phpcpd public/api src test"
+        "cpd": "php vendor/sebastian/phpcpd/phpcpd public/api src test",
+        "met": "php vendor/phpmetrics/phpmetrics/bin/phpmetrics --report-html=report/metrics.html src"
     }
 }
