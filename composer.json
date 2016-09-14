@@ -40,7 +40,8 @@
         "squizlabs/php_codesniffer": "^2.7",
         "phpmd/phpmd": "^2.4",
         "pdepend/pdepend": "^2.2",
-        "phploc/phploc": "^3.0"
+        "phploc/phploc": "^3.0",
+        "sebastian/phpcpd": "^2.0"
     },
     "scripts": {
         "build": "composer install --prefer-dist --optimize-autoloader --no-interaction --no-dev",
@@ -53,6 +54,7 @@
         "md": "php vendor/phpmd/phpmd/src/bin/phpmd public/api,src,test text cleancode,codesize,controversial,design,naming,unusedcode",
         "md_html": "php vendor/phpmd/phpmd/src/bin/phpmd public/api,src,test html cleancode,codesize,controversial,design,naming,unusedcode --reportfile report/phpmd.html",
         "dp": "php vendor/pdepend/pdepend/src/bin/pdepend --dependency-xml=report/dependency.xml --summary-xml=report/summary.xml --jdepend-chart=report/jdepend.svg --overview-pyramid=report/pyramid.svg public/api,src,test",
-        "loc": "php vendor/phploc/phploc/phploc public/api src"
+        "loc": "php vendor/phploc/phploc/phploc public/api src",
+        "cpd": "php vendor/sebastian/phpcpd/phpcpd public/api src test"
     }
 }
