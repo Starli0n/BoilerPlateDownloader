@@ -21,10 +21,17 @@ function loadBootstrapEnv($bBuildInServer = true)
     define("WEB_SERVER_DOCROOT", './publish/');
     define("WEB_SERVER_ADDRESS", sprintf('http://%s:%s', WEB_SERVER_HOST, WEB_SERVER_PORT));
     define('REPORT_DIR', PROJECT_ROOT . '/report');
+    define('COVER_DIR', REPORT_DIR . '/cover');
+    define('BUILD_DIR', REPORT_DIR . '/build');
+    define('PDEPEND_DIR', BUILD_DIR . '/pdepend');
 
-    if (delTree(REPORT_DIR)) {
-        echo sprintf('  > \'%s\' deleted', REPORT_DIR) . PHP_EOL;
+    if (delTree(COVER_DIR)) {
+        echo sprintf('  > \'%s\' deleted', COVER_DIR) . PHP_EOL;
     }
+
+    createDir(REPORT_DIR);
+    createDir(BUILD_DIR);
+    createDir(PDEPEND_DIR);
 
     if ($bBuildInServer) {
         phpServe();
@@ -63,6 +70,14 @@ function delTree($dir)
     }
     rmdir($dir);
     return true;
+}
+
+function createDir($dir)
+{
+    if (file_exists($dir)) {
+        return;
+    }
+    mkdir($dir);
 }
 
 /**

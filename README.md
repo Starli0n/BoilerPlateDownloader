@@ -24,11 +24,10 @@ Start with the next chapiter if it is your first intall and if node.js is not in
 > composer install
 > npm install
 > bower install
+> gulp :publish
 > gulp :deploy
 > gulp :test
-	+ composer test
-	+ composer cover
-	+ composer sniff
+> gulp :doc
 ```
 
 For PHP Tools for Visual Studio

@@ -52,7 +52,8 @@ files = {
         'vendor/**/*',
         'logs',
         '!logs/**'],
-    js: ['**/*.js'].concat(files.exclude)
+    js: ['**/*.js'].concat(files.exclude),
+    report: paths.report + '/**/*'
 };
 
 
@@ -81,6 +82,10 @@ gulp.task('clean:publish', function () {
 
 gulp.task('clean:deploy', function () {
     return del([files.deploy], { dot : true });
+});
+
+gulp.task('clean:report', function () {
+    return del([files.report], { dot : true });
 });
 
 gulp.task('lint:publish', ['clean:publish'], function () {
@@ -128,23 +133,16 @@ if (process.env.NODE_ENV !== 'production') {
         composer('test', cpr_opt);
     });
 
-    gulp.task('server:cover', function () {
-        composer('cover', cpr_opt);
-    });
-
-    gulp.task('server:sniff', function () {
-        composer('sniff', cpr_opt);
-    });
-
-    gulp.task('server:md', function () {
-        composer('md', cpr_opt);
+    gulp.task('server:doc', function () {
+        composer('doc', cpr_opt);
     });
 }
 
 
 // Global tasks
 gulp.task('default', ['clean']);
-gulp.task(':clean', ['clean:deploy', 'clean:publish']);
+gulp.task(':clean', ['clean:deploy', 'clean:publish', 'clean:report']);
 gulp.task(':publish', ['clean:publish', 'lint:publish', 'copy:publish']);
 gulp.task(':deploy', ['clean:deploy', 'lint:deploy', 'copy:deploy', 'base:deploy', 'zip:deploy']);
-gulp.task(':test', ['server:test', 'server:cover', 'server:sniff', 'server:md']);
+gulp.task(':test');
+gulp.task(':doc');

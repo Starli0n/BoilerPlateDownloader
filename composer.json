@@ -45,18 +45,39 @@
         "phpmetrics/phpmetrics": "^1.10"
     },
     "scripts": {
+        "test": [
+            "@unit",
+            "@sniff",
+            "@md",
+            "@cpd"
+        ],
+        "doc": [
+            "@unit",
+            "@sniff-xml",
+            "@cs",
+            "@md-xml",
+            "@md-html",
+            "@cpd",
+            "@loc",
+            "@dp",
+            "@met",
+            "phpdox"
+        ],
         "build": "composer install --prefer-dist --optimize-autoloader --no-interaction --no-dev",
         "build-dev": "composer install --prefer-dist --optimize-autoloader --no-interaction",
-        "test": "php vendor/phpunit/phpunit/phpunit --verbose --configuration=./test/phpunit.xml --coverage-text --coverage-html=./report --coverage-clover=./report/clover.xml --bootstrap=./test/bootstrap.php",
+        "unit": "php vendor/phpunit/phpunit/phpunit --verbose --configuration=./test/phpunit.xml --coverage-text --coverage-html=./report/cover --coverage-xml=./report/build/coverage --coverage-clover=./report/build/clover.xml --bootstrap=./test/bootstrap.php",
         "cover": "php vendor/satooshi/php-coveralls/bin/coveralls --config ./test/.coveralls.yml",
         "debug": "php test/debug.php",
         "sniff": "php vendor/squizlabs/php_codesniffer/scripts/phpcs --standard=PSR2 --extensions=php public/api src test",
+        "sniff-xml": "php vendor/squizlabs/php_codesniffer/scripts/phpcs --report=xml --report-file=report/build/phpcs.xml --standard=PSR2 --extensions=php public/api src test",
+        "cs": "php vendor/squizlabs/php_codesniffer/scripts/phpcs --report=checkstyle --report-file=report/build/checkstyle.xml --standard=PSR2 --extensions=php public/api src test",
         "fix": "php vendor/squizlabs/php_codesniffer/scripts/phpcbf --no-patch --standard=PSR2 --extensions=php public/api src test",
         "md": "php vendor/phpmd/phpmd/src/bin/phpmd public/api,src,test text cleancode,codesize,controversial,design,naming,unusedcode",
-        "md_html": "php vendor/phpmd/phpmd/src/bin/phpmd public/api,src,test html cleancode,codesize,controversial,design,naming,unusedcode --reportfile report/phpmd.html",
-        "dp": "php vendor/pdepend/pdepend/src/bin/pdepend --dependency-xml=report/dependency.xml --summary-xml=report/summary.xml --jdepend-chart=report/jdepend.svg --overview-pyramid=report/pyramid.svg public/api,src,test",
-        "loc": "php vendor/phploc/phploc/phploc public/api src",
-        "cpd": "php vendor/sebastian/phpcpd/phpcpd public/api src test",
-        "met": "php vendor/phpmetrics/phpmetrics/bin/phpmetrics --report-html=report/metrics.html src"
+        "md-html": "php vendor/phpmd/phpmd/src/bin/phpmd public/api,src,test html cleancode,codesize,controversial,design,naming,unusedcode --reportfile report/pmd.html",
+        "md-xml": "php vendor/phpmd/phpmd/src/bin/phpmd public/api,src,test xml cleancode,codesize,controversial,design,naming,unusedcode --reportfile report/build/pmd.xml",
+        "cpd": "php vendor/sebastian/phpcpd/phpcpd --log-pmd=report/build/phpcpd.xml public/api src test",
+        "loc": "php vendor/phploc/phploc/phploc --count-tests --log-xml=report/build/phploc.xml public/api src test",
+        "dp": "php vendor/pdepend/pdepend/src/bin/pdepend --jdepend-xml=report/build/pdepend/jdepend.xml --dependency-xml=report/build/pdepend/dependency.xml --summary-xml=report/build/pdepend/summary.xml --jdepend-chart=report/build/pdepend/jdepend.svg --overview-pyramid=report/build/pdepend/pyramid.svg public/api,src,test",
+        "met": "php vendor/phpmetrics/phpmetrics/bin/phpmetrics --report-html=report/metrics.html --report-xml=report/build/metrics.xml src"
     }
 }
