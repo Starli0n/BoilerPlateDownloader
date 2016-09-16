@@ -63,6 +63,7 @@
             "@met",
             "phpdox"
         ],
+        "auto": "composer validate --no-check-lock --strict composer.json",
         "build": "composer install --prefer-dist --optimize-autoloader --no-interaction --no-dev",
         "build-dev": "composer install --prefer-dist --optimize-autoloader --no-interaction",
         "unit": "php vendor/phpunit/phpunit/phpunit --verbose --configuration=./test/phpunit.xml --coverage-text --coverage-html=./report/cover --coverage-xml=./report/build/coverage --coverage-clover=./report/build/clover.xml --bootstrap=./test/bootstrap.php",

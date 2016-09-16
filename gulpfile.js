@@ -103,15 +103,15 @@ gulp.task('copy:publish', ['lint:publish'], function () {
 gulp.task('copy:deploy', ['lint:deploy'], function () {
     copyFromPublic(paths.deploy_public);
 
-    gulp.src('deploy.htaccess')
-        .pipe(rename('.htaccess'))
-        .pipe(gulp.dest(paths.deploy));
-
     return gulp.src(files.private, { base: "." })
         .pipe(gulp.dest(paths.deploy));
 });
 
-gulp.task('base:deploy', ['copy:deploy'], function () {
+gulp.task('dev:deploy', ['copy:deploy'], function () {
+    gulp.src('deploy.htaccess')
+        .pipe(rename('.htaccess'))
+        .pipe(gulp.dest(paths.deploy));
+
     return gulp.src(paths.deploy_public + '/index.html')
         .pipe(inject.after('<head>', '\n    <base href="public/" />'))
         .pipe(gulp.dest(paths.deploy_public));
@@ -143,6 +143,7 @@ if (process.env.NODE_ENV !== 'production') {
 gulp.task('default', ['clean']);
 gulp.task(':clean', ['clean:deploy', 'clean:publish', 'clean:report']);
 gulp.task(':publish', ['clean:publish', 'lint:publish', 'copy:publish']);
-gulp.task(':deploy', ['clean:deploy', 'lint:deploy', 'copy:deploy', 'base:deploy', 'zip:deploy']);
+gulp.task(':deploy', ['clean:deploy', 'lint:deploy', 'copy:deploy']);
+gulp.task(':deploy-dev', ['clean:deploy', 'lint:deploy', 'copy:deploy', 'dev:deploy', 'zip:deploy']);
 gulp.task(':test');
 gulp.task(':doc');
